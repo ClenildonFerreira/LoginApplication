@@ -24,6 +24,6 @@ public class UserCreateDto {
     @Email(message = "formato do e-mail está invalido", regexp = "^[a-z0-9.+-]+@[a-z0-9.-]+\\.[a-z]{2,}$")
     private String username;
     @NotBlank(message = "Password é obrigatório!")
-    @Size(min = 8, max = 8)
+    @Size(min = 8, max = 20)
     private String password;
 }

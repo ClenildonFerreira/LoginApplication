@@ -13,12 +13,12 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserPasswordDto {
     @NotBlank(message = "Password é obrigatório!")
-    @Size(min = 8, max = 8)
+    @Size(min = 8, max = 20)
     private String currentPassword;
     @NotBlank(message = "Password é obrigatório!")
-    @Size(min = 8, max = 8)
+    @Size(min = 8, max = 20)
     private String newPassword;
     @NotBlank(message = "Password é obrigatório!")
-    @Size(min = 8, max = 8)
+    @Size(min = 8, max = 20)
     private String confirmPassword;
 }
