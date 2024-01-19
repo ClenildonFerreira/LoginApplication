@@ -2,6 +2,10 @@ package io.github.clenildonferreira.devtechnicaltestapi.web.controller;
 
 import io.github.clenildonferreira.devtechnicaltestapi.entity.User;
 import io.github.clenildonferreira.devtechnicaltestapi.service.UserService;
+import io.github.clenildonferreira.devtechnicaltestapi.web.dto.UserCreateDto;
+import io.github.clenildonferreira.devtechnicaltestapi.web.dto.UserPasswordDto;
+import io.github.clenildonferreira.devtechnicaltestapi.web.dto.UserResponseDto;
+import io.github.clenildonferreira.devtechnicaltestapi.web.dto.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,26 +20,26 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<User> create(@RequestBody User user) {
-        User usuario = userService.salva(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
+    public ResponseEntity<UserResponseDto> create(@RequestBody UserCreateDto createDto) {
+        User user = userService.salva(UserMapper.toUser(createDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(UserMapper.toDto(user));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getById(@PathVariable Long id) {
-        User usuario = userService.searchById(id);
-        return ResponseEntity.ok(usuario);
+    public ResponseEntity<UserResponseDto> getById(@PathVariable Long id) {
+        User user = userService.searchById(id);
+        return ResponseEntity.ok(UserMapper.toDto(user));
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<User> updatePassword(@PathVariable Long id, @RequestBody User user) {
-        User usuario = userService.editPassword(id, user.getPassword());
-        return ResponseEntity.ok(usuario);
+    public ResponseEntity<Void> updatePassword(@PathVariable Long id, @RequestBody UserPasswordDto dto) {
+        User user = userService.editPassword(id, dto.getCurrentPassword(), dto.getNewPassword(), dto.getConfirmPassword());
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAll() {
-        List<User> usuarios = userService.searchAll();
-        return ResponseEntity.ok(usuarios);
+    public ResponseEntity<List<UserResponseDto>> getAll() {
+        List<User> users = userService.searchAll();
+        return ResponseEntity.ok(UserMapper.toListDto(users));
     }
 }

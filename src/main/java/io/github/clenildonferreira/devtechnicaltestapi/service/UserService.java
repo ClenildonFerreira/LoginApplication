@@ -26,10 +26,18 @@ public class UserService {
     }
 
     @Transactional
-    public User editPassword(Long id, String password) {
-        User usuario = searchById(id);
-        usuario.setPassword(password);
-        return usuario;
+    public User editPassword(Long id, String currentPassword, String newPassword, String confirmPassword) {
+        if (!newPassword.equals(confirmPassword)) {
+            throw new RuntimeException("Nova senha não confere com a confirmação da senha.");
+        }
+
+        User user = searchById(id);
+        if(!user.getPassword().equals(currentPassword)) {
+            throw new RuntimeException("Sua senha não confere.");
+        }
+
+        user.setPassword(newPassword);
+        return user;
     }
 
     @Transactional(readOnly = true)
