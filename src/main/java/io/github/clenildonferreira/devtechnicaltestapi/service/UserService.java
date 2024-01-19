@@ -1,9 +1,13 @@
 package io.github.clenildonferreira.devtechnicaltestapi.service;
 
 import io.github.clenildonferreira.devtechnicaltestapi.entity.User;
+import io.github.clenildonferreira.devtechnicaltestapi.exception.EntityNotFoundException;
+import io.github.clenildonferreira.devtechnicaltestapi.exception.PasswordInvalidException;
 import io.github.clenildonferreira.devtechnicaltestapi.repository.UserRepository;
 
+import io.github.clenildonferreira.devtechnicaltestapi.exception.UserNameUniqueViolationException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,25 +19,30 @@ public class UserService {
     private final UserRepository userRepository;
     @Transactional
     public User salva(User user) {
-        return userRepository.save(user);
+        try {
+            return userRepository.save(user);
+
+        }catch (DataIntegrityViolationException ex) {
+            throw new UserNameUniqueViolationException(String.format("Email {%s} ou CPF {%s} já cadastrado.", user.getUsername(), user.getCpf()));
+        }
     }
 
     @Transactional(readOnly = true)
     public User searchById(Long id) {
         return userRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("User not found")
+                () -> new EntityNotFoundException(String.format("Usuário id=%s não encontrado.", id))
         );
     }
 
     @Transactional
     public User editPassword(Long id, String currentPassword, String newPassword, String confirmPassword) {
         if (!newPassword.equals(confirmPassword)) {
-            throw new RuntimeException("Nova senha não confere com a confirmação da senha.");
+            throw new PasswordInvalidException("Nova senha não confere com a confirmação da senha.");
         }
 
         User user = searchById(id);
         if(!user.getPassword().equals(currentPassword)) {
-            throw new RuntimeException("Sua senha não confere.");
+            throw new PasswordInvalidException("Sua senha não confere.");
         }
 
         user.setPassword(newPassword);
