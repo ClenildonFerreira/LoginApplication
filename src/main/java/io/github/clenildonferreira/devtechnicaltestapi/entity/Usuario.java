@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
@@ -33,14 +32,6 @@ public class Usuario implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false, length = 30)
     private Usuario.UserRole role = UserRole.ROLE_USER;
-    @Column(name = "createdDate")
-    private LocalDateTime createdDate;
-    @Column(name = "updateDate")
-    private LocalDateTime updateDate;
-    @Column(name = "createdAt")
-    private String createdAt;
-    @Column(name = "updateAt")
-    private String updateAt;
 
     public enum UserRole {
         ROLE_ADMIN,
