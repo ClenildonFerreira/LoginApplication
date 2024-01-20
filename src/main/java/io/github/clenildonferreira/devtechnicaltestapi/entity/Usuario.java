@@ -1,6 +1,5 @@
 package io.github.clenildonferreira.devtechnicaltestapi.entity;
 
-import io.github.clenildonferreira.devtechnicaltestapi.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +17,7 @@ import java.util.Objects;
 @Entity
 
 @Table(name = "user")
-public class User implements Serializable {
+public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -33,7 +32,7 @@ public class User implements Serializable {
     private String password;
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false, length = 30)
-    private UserRole role = UserRole.ROLE_USER;
+    private Usuario.UserRole role = UserRole.ROLE_USER;
     @Column(name = "createdDate")
     private LocalDateTime createdDate;
     @Column(name = "updateDate")
@@ -43,12 +42,16 @@ public class User implements Serializable {
     @Column(name = "updateAt")
     private String updateAt;
 
+    public enum UserRole {
+        ROLE_ADMIN,
+        ROLE_USER
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id;
+        Usuario usuario = (Usuario) o;
+        return id == usuario.id;
     }
     @Override
     public int hashCode() {

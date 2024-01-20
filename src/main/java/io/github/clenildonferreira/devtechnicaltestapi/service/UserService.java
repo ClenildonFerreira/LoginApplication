@@ -1,6 +1,6 @@
 package io.github.clenildonferreira.devtechnicaltestapi.service;
 
-import io.github.clenildonferreira.devtechnicaltestapi.entity.User;
+import io.github.clenildonferreira.devtechnicaltestapi.entity.Usuario;
 import io.github.clenildonferreira.devtechnicaltestapi.exception.EntityNotFoundException;
 import io.github.clenildonferreira.devtechnicaltestapi.exception.PasswordInvalidException;
 import io.github.clenildonferreira.devtechnicaltestapi.repository.UserRepository;
@@ -8,6 +8,7 @@ import io.github.clenildonferreira.devtechnicaltestapi.repository.UserRepository
 import io.github.clenildonferreira.devtechnicaltestapi.exception.UserNameUniqueViolationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,40 +18,55 @@ import java.util.List;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
     @Transactional
-    public User salva(User user) {
+    public Usuario salva(Usuario usuario) {
         try {
-            return userRepository.save(user);
+            usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+            return userRepository.save(usuario);
 
         }catch (DataIntegrityViolationException ex) {
-            throw new UserNameUniqueViolationException(String.format("Email {%s} ou CPF {%s} já cadastrado.", user.getUsername(), user.getCpf()));
+            throw new UserNameUniqueViolationException(String.format("Email {%s} ou CPF {%s} já cadastrado.", usuario.getUsername(), usuario.getCpf()));
         }
     }
 
     @Transactional(readOnly = true)
-    public User searchById(Long id) {
+    public Usuario searchById(Long id) {
         return userRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException(String.format("Usuário id=%s não encontrado.", id))
         );
     }
 
     @Transactional
-    public User editPassword(Long id, String currentPassword, String newPassword, String confirmPassword) {
+    public Usuario editPassword(Long id, String currentPassword, String newPassword, String confirmPassword) {
         if (!newPassword.equals(confirmPassword)) {
             throw new PasswordInvalidException("Nova senha não confere com a confirmação da senha.");
         }
 
-        User user = searchById(id);
-        if(!user.getPassword().equals(currentPassword)) {
+        Usuario user = searchById(id);
+        if(!passwordEncoder.matches(currentPassword, user.getPassword())) {
             throw new PasswordInvalidException("Sua senha não confere.");
         }
 
-        user.setPassword(newPassword);
+        user.setPassword(passwordEncoder.encode(newPassword));
+
         return user;
     }
 
     @Transactional(readOnly = true)
-    public List<User> searchAll() {
+    public List<Usuario> searchAll() {
         return userRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Usuario searchByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Usuário com '%s' não encontrado", username))
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public Usuario.UserRole searchRoleByUsername(String username) {
+        return userRepository.findRoleByUsername(username);
     }
 }

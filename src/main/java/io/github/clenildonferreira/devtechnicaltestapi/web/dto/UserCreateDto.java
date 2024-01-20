@@ -1,5 +1,6 @@
 package io.github.clenildonferreira.devtechnicaltestapi.web.dto;
 
+import io.github.clenildonferreira.devtechnicaltestapi.entity.Usuario;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -26,4 +27,5 @@ public class UserCreateDto {
     @NotBlank(message = "Password é obrigatório!")
     @Size(min = 8, max = 20)
     private String password;
+
 }

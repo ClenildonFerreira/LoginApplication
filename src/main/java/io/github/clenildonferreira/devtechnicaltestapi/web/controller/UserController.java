@@ -1,6 +1,6 @@
 package io.github.clenildonferreira.devtechnicaltestapi.web.controller;
 
-import io.github.clenildonferreira.devtechnicaltestapi.entity.User;
+import io.github.clenildonferreira.devtechnicaltestapi.entity.Usuario;
 import io.github.clenildonferreira.devtechnicaltestapi.service.UserService;
 import io.github.clenildonferreira.devtechnicaltestapi.web.dto.UserCreateDto;
 import io.github.clenildonferreira.devtechnicaltestapi.web.dto.UserPasswordDto;
@@ -17,6 +17,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,8 +38,8 @@ public class UserController {
     })
     @PostMapping
     public ResponseEntity<UserResponseDto> create(@Valid @RequestBody UserCreateDto createDto) {
-        User user = userService.salva(UserMapper.toUser(createDto));
-        return ResponseEntity.status(HttpStatus.CREATED).body(UserMapper.toDto(user));
+        Usuario usuario = userService.salva(UserMapper.toUser(createDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(UserMapper.toDto(usuario));
     }
 
     @Operation(summary = "Recuperar um usuário pelo id", description = "Recuperar um usuário pelo id",
@@ -50,8 +51,8 @@ public class UserController {
             })
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDto> getById(@PathVariable Long id) {
-        User user = userService.searchById(id);
-        return ResponseEntity.ok(UserMapper.toDto(user));
+        Usuario usuario = userService.searchById(id);
+        return ResponseEntity.ok(UserMapper.toDto(usuario));
     }
 
     @Operation(summary = "Atualizar senha", description = "Atualizar senha",
@@ -67,7 +68,7 @@ public class UserController {
             })
     @PatchMapping("/{id}")
     public ResponseEntity<Void> updatePassword(@PathVariable Long id,@Valid @RequestBody UserPasswordDto dto) {
-        User user = userService.editPassword(id, dto.getCurrentPassword(), dto.getNewPassword(), dto.getConfirmPassword());
+        Usuario usuario = userService.editPassword(id, dto.getCurrentPassword(), dto.getNewPassword(), dto.getConfirmPassword());
         return ResponseEntity.noContent().build();
     }
 
@@ -78,8 +79,9 @@ public class UserController {
                                     array = @ArraySchema(schema = @Schema(implementation = UserResponseDto.class))))
             })
     @GetMapping
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UserResponseDto>> getAll() {
-        List<User> users = userService.searchAll();
-        return ResponseEntity.ok(UserMapper.toListDto(users));
+        List<Usuario> usuarios = userService.searchAll();
+        return ResponseEntity.ok(UserMapper.toListDto(usuarios));
     }
 }
