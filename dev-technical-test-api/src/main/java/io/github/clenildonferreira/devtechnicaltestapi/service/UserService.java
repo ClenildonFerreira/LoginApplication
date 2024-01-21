@@ -7,6 +7,7 @@ import io.github.clenildonferreira.devtechnicaltestapi.repository.UserRepository
 
 import io.github.clenildonferreira.devtechnicaltestapi.exception.UserNameUniqueViolationException;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.ThreadUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -68,5 +69,9 @@ public class UserService {
     @Transactional(readOnly = true)
     public Usuario.UserRole searchRoleByUsername(String username) {
         return userRepository.findRoleByUsername(username);
+    }
+
+    public void delete(Long id) {
+        userRepository.findById(id);
     }
 }

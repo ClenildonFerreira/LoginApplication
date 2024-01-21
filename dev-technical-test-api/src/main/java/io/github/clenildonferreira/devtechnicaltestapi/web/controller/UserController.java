@@ -94,4 +94,11 @@ public class UserController {
         List<Usuario> usuarios = userService.searchAll();
         return ResponseEntity.ok(UserMapper.toListDto(usuarios));
     }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
