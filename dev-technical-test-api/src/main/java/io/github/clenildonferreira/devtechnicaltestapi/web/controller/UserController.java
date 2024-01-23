@@ -95,10 +95,22 @@ public class UserController {
         return ResponseEntity.ok(UserMapper.toListDto(usuarios));
     }
 
+    @Operation(summary = "Deletar um usuário", description = "Recurso para Deletar um novo usuário",
+            responses = {
+                    @ApiResponse(responseCode = "201", description = "Recurso criado com sucesso",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDto.class))),
+                    @ApiResponse(responseCode = "404", description = "Recurso não não encontrado",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
+            })
+
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        userService.delete(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<UserResponseDto> deleteUser(@PathVariable Long id) {
+       Usuario user = userService.searchById(id);
+       if (user == null)
+        return ResponseEntity.notFound().build();
+
+       userService.deleteUser(user);
+       return ResponseEntity.noContent().build();
     }
 }

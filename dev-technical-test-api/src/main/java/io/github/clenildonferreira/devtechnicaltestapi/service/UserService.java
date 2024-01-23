@@ -71,7 +71,8 @@ public class UserService {
         return userRepository.findRoleByUsername(username);
     }
 
-    public void delete(Long id) {
-        userRepository.findById(id);
+    @Transactional
+    public void deleteUser(Usuario user) {
+        userRepository.delete(user);
     }
 }
