@@ -10,6 +10,7 @@
     <p align="center">
       <a href="#-sobre">Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+      <a href="#-Funcionalidades-da-API">Funcionalidades da API</a>&nbsp;&nbsp;&nbsp;
   </p>
 </h3>
 
@@ -61,3 +62,6 @@ O Objetivo será avaliar sua capacidade de criar uma aplicação web funcional, 
 - Requisitos / Autenticação
   - Implementar um sistema de segurança e autenticação com JSON Web Token
   - O recurso criado está documentado..
+
+# Endpoints
+Fiz deploy para ficar facil os testes
