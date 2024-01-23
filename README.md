@@ -18,11 +18,11 @@
 ## 🔖 Sobre
 
 O Objetivo será avaliar sua capacidade de criar uma aplicação web funcional, garantindo uma experiência de usuário e segurança no processo de autenticação. Desenvolva um sistema web de login que atenda aos seguintes requisitos:
-Cadastrar um usuário utilizando nome, e-mail, senha, CPF, (Perfil Usuário, Administrador) sem a necessidade de estar logado no sistema.
-Permitir que esse usuário criado faça o login no sistema e acesse a tela de HOME, contendo uma mensagem de “Hola Mundo”.
-Validação para não permitir a criação de usuários com dados duplicados ou inválidos.
-Tela para realizar a troca de minha própria senha, solicitando a confirmação de inserção dos dados.
-Os usuários que tiverem o perfil de Administrador poderão acessar uma lista contendo todos os usuários cadastrados no sistema, com a opção de exclusão dos usuários cadastrados na plataforma.
+- Cadastrar um usuário utilizando nome, e-mail, senha, CPF, (Perfil Usuário, Administrador) sem a necessidade de estar logado no sistema.
+- Permitir que esse usuário criado faça o login no sistema e acesse a tela de HOME, contendo uma mensagem de “Hola Mundo”.
+- Validação para não permitir a criação de usuários com dados duplicados ou inválidos.
+- Tela para realizar a troca de minha própria senha, solicitando a confirmação de inserção dos dados.
+- Os usuários que tiverem o perfil de Administrador poderão acessar uma lista contendo todos os usuários cadastrados no sistema, com a opção de exclusão dos usuários cadastrados na plataforma.
 
 ## 🚀 Tecnologias
 
