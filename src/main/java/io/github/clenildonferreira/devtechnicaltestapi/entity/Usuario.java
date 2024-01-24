@@ -31,7 +31,7 @@ public class Usuario implements Serializable {
     private String password;
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false, length = 30)
-    private Usuario.UserRole role = UserRole.ROLE_ADMIN;
+    private Usuario.UserRole role = UserRole.ROLE_USER;
 
     public enum UserRole {
         ROLE_ADMIN,

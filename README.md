@@ -10,7 +10,8 @@
     <p align="center">
       <a href="#-sobre">Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <a href="#-Funcionalidades-da-API">Funcionalidades da API</a>&nbsp;&nbsp;&nbsp;
+      <a href="#-funcionalidades-da-API">Funcionalidades da API</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+      <a href="#-endpoints">Funcionalidades da API</a>&nbsp;&nbsp;&nbsp;
   </p>
 </h3>
 
@@ -63,5 +64,46 @@ O Objetivo será avaliar sua capacidade de criar uma aplicação web funcional, 
   - Implementar um sistema de segurança e autenticação com JSON Web Token
   - O recurso criado está documentado..
 
-# Endpoints
-Fiz deploy para ficar facil os testes
+## Endpoints
+
+- Pesquisar todos Usuarios
+  - GET http://localhost:8080/api/v1/users
+
+
+  - Pesquisar por ID
+    - GET http://localhost:8080/api/v1/users/{id}
+
+  - Criar Novos Usuario 
+    - POST http://localhost:8080/api/v1/users
+    ```
+      {
+        "name": "julio",
+        "cpf": "817.119.530-08",
+        "username": "julio@gmail.com",
+        "password": "123456789"
+      }
+    ```
+  - Autenticação do usuário'
+    - POST http://localhost:8080/api/v1/auth
+    ```
+        {
+          "username": "julio@gmail.com",
+          "password": "123456789"
+        }
+    ```
+  - Atualizar senha
+    - PATCH http://localhost:8080/api/v1/users/{id}
+  ```
+    {
+      "currentPassword": "12345678910",
+      "newPassword": "123456789",
+      "confirmPassword": "123456789"
+    }
+  ```
+
+  - Deletar um usuario 
+    - DELETE http://localhost:8080/api/v1/users/{id}
+
+
+- Mais informações dos endpoints está no Swagger
+- Script SQL na pasta reources so projeto.
