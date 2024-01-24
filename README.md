@@ -17,7 +17,7 @@
 
 <hr>
 
-## 🔖 Sobre
+## 🚀 Sobre
 
 O Objetivo será avaliar sua capacidade de criar uma aplicação web funcional, garantindo uma experiência de usuário e segurança no processo de autenticação. Desenvolva um sistema web de login que atenda aos seguintes requisitos:
 - Cadastrar um usuário utilizando nome, e-mail, senha, CPF, (Perfil Usuário, Administrador) sem a necessidade de estar logado no sistema.
@@ -46,7 +46,7 @@ O Objetivo será avaliar sua capacidade de criar uma aplicação web funcional, 
   - [Docker]
 
 
-## Funcionalidades da API
+## 🚀 Funcionalidades da API
 - Requisitos / Usuários
   - O usuário deverá ter um e-mail, o qual será usado como username (deve ser único)
   - O usuário deverá ter uma senha de 8 caracteres no min e max 20 caracteres
@@ -64,7 +64,7 @@ O Objetivo será avaliar sua capacidade de criar uma aplicação web funcional, 
   - Implementar um sistema de segurança e autenticação com JSON Web Token
   - O recurso criado está documentado..
 
-## Endpoints
+## 🚀 Endpoints
 
 - Pesquisar todos Usuarios
   - GET http://localhost:8080/api/v1/users
