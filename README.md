@@ -11,7 +11,7 @@
       <a href="#-sobre">Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       <a href="#-funcionalidades">Funcionalidades da API</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <a href="#-endpoints">Funcionalidades da API</a>&nbsp;&nbsp;&nbsp;
+      <a href="#-endpoints">Endpoints</a>&nbsp;&nbsp;&nbsp;
   </p>
 </h3>
 
@@ -46,7 +46,7 @@ O Objetivo será avaliar sua capacidade de criar uma aplicação web funcional, 
   - [Docker]
 
 
-  ## Funcionalidades da API
+## Funcionalidades da API
 - Requisitos / Usuários
   - O usuário deverá ter um e-mail, o qual será usado como username (deve ser único)
   - O usuário deverá ter uma senha de 8 caracteres no min e max 20 caracteres
