@@ -46,7 +46,7 @@ O Objetivo será avaliar sua capacidade de criar uma aplicação web funcional, 
   - [Docker]
 
 
-## 🚀 Funcionalidades da API
+## 🚀 Funcionalidades
 - Requisitos / Usuários
   - O usuário deverá ter um e-mail, o qual será usado como username (deve ser único)
   - O usuário deverá ter uma senha de 8 caracteres no min e max 20 caracteres
